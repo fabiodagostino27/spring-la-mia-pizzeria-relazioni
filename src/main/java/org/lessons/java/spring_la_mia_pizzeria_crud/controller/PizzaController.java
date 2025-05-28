@@ -95,7 +95,7 @@ public class PizzaController {
         Sale sale = new Sale();
         sale.setPizza(repository.findById(id).get());
         model.addAttribute("sale", sale);
-        return "/sales/create";
+        return "/sales/form";
     }
     
 }

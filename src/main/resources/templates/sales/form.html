@@ -4,7 +4,7 @@
     <nav th:replace="~{fragments/fragments :: navbar}" />
     <main class="container mb-4">
         <h1>Aggiungi un'offerta a: [[${sale.getPizza().getName()}]]</h1>
-        <form id="sale-form" th:object="${sale}" th:action="@{/sales/create}" th:method="POST" class="my-3">
+        <form id="sale-form" th:object="${sale}" th:action="${edit} ? @{/sales/edit/{id}(id=${sale.id})} : @{/sales/create}" th:method="POST" class="my-3">
             <input type="hidden" th:field="*{pizza}">
 
             <div class="mb-3">

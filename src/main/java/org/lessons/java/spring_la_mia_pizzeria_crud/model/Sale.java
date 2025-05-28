@@ -9,8 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
 @Table(name = "sales")
@@ -25,6 +27,7 @@ public class Sale {
     @NotNull(message = "The starting date must not be null")
     private LocalDate startingDate;
     
+    @Future(message = "A sale ending can't be in the past")
     @NotNull(message = "The ending date must not be null")
     private LocalDate endingDate;
     
