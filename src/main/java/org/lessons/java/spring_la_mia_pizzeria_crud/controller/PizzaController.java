@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Sale;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,6 +88,14 @@ public class PizzaController {
         repository.deleteById(id);
         
         return "redirect:/pizzas";
+    }
+
+    @GetMapping("/{id}/sale")
+    public String sale(@PathVariable("id") Integer id, Model model) {
+        Sale sale = new Sale();
+        sale.setPizza(repository.findById(id).get());
+        model.addAttribute("sale", sale);
+        return "sales/create";
     }
     
 }
