@@ -50,4 +50,12 @@ public class SaleController {
 
         return "redirect:/pizzas/" + sale.getPizza().getId();
     }
+
+    @PostMapping("delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        Integer utilId = repository.findById(id).get().getPizza().getId();
+        repository.deleteById(id);
+        
+        return "redirect:/pizzas/" + utilId;
+    }
 }

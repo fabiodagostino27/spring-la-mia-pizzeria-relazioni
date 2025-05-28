@@ -53,7 +53,8 @@
             <a class="btn btn-primary" th:href="@{/pizzas/{id}/sale(id=${pizza.id})}">Aggiungi offerta</a>
         </div>
         <div class="col-12 row gap-2">
-            <div class="card col-3 bg-warning-subtle px-0 flex-grow-1" th:each="sale : ${pizza.getSales()}" th:if="${pizza.getSales().size > 0}">
+            <div class="card col-3 bg-warning-subtle px-0 flex-grow-1" th:each="sale : ${pizza.getSales()}"
+                th:if="${pizza.getSales().size > 0}">
                 <div class="card-header">
                     Offerta!
                 </div>
@@ -61,7 +62,12 @@
                     <h5 class="card-title">[[${sale.title}]]</h5>
                     <span class="card-text">Data d'inizio: [[${sale.startingDate}]]</span>
                     <p class="card-text">Data di fine: [[${sale.endingDate}]]</p>
-                    <a th:href="@{/sales/edit/{id}(id=${sale.id})}">Modifica</a>
+                    <div class="d-flex gap-1 align-items-center">
+                        <a class="btn btn-primary" th:href="@{/sales/edit/{id}(id=${sale.id})}">Modifica</a>
+                        <form action="#" th:action="@{/sales/delete/{id}(id=${sale.id})}" th:method="post">
+                            <button class="btn btn-danger" type="submit">Elimina</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <p th:unless="${pizza.getSales().size > 0}">Nessun offerta disponibile per questa pizza.</p>
