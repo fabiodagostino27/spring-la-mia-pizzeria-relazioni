@@ -3,7 +3,7 @@
 <body>
     <nav th:replace="~{fragments/fragments :: navbar}" />
     <main class="container mb-4">
-        <h1>Agiiungi una pizza al menu</h1>
+        <h1>Modifica: [[${pizza.name}]]</h1>
         <form id="pizza-form" th:object="${pizza}" th:action="@{/pizzas/edit/{id}(id=${pizza.id})}" th:method="POST" class="my-3">
             <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
