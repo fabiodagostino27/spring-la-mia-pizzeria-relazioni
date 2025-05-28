@@ -1,11 +1,13 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -30,7 +32,17 @@ public class Pizza {
     @NotNull(message = "The price must not be null")
     @Min(value = 1)
     private BigDecimal price;
-    
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Sale> sales;
+
+    public List<Sale> getSales() {
+        return this.sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
+    }
     
     public Integer getId() {
         return this.id;
