@@ -106,6 +106,6 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return String.format("%s, %s", this.name, this.description);
+        return this.name;
     }
 }

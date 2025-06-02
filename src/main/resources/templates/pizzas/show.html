@@ -39,6 +39,10 @@
                 <img class="w-100" th:src="${pizza.imageUrl}" th:alt="${pizza.name}">
             </figure>
             <div>
+                <h3>IngredientI: </h3>
+                <ul>
+                    <li th:each="ingredient : ${pizza.ingredients}">[[${ingredient.name}]]</li>
+                </ul>
                 <h3>Descrizione: </h3>
                 <p>[[${pizza.description}]]</p>
                 <h4>Il prezzo è: [[${pizza.price}]]€</h4>

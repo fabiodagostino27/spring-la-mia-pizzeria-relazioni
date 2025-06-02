@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Sale;
+import org.lessons.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repo.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class PizzaController {
     @Autowired
     private SaleRepository saleRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
     @GetMapping
     public String pizzasIndex(Model model) {
         List<Pizza> pizzas = repository.findAll();
@@ -54,13 +58,15 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
-        return "pizzas/create";
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        return "pizzas/form";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/pizzas/create";
+            model.addAttribute("ingredients", ingredientRepository.findAll());
+            return "/pizzas/form";
         }
 
         repository.save(pizza);
@@ -70,14 +76,18 @@ public class PizzaController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
+        boolean edit = true;
+        model.addAttribute("edit", edit);
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         model.addAttribute("pizza", repository.findById(id).get());
-        return "pizzas/edit";
+        return "pizzas/form";
     }
 
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/pizzas/edit";
+            model.addAttribute("ingredients", ingredientRepository.findAll());
+            return "/pizzas/form";
         }
 
         repository.save(pizza);
