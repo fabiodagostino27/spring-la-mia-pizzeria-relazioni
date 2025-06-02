@@ -13,9 +13,9 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 @RequestMapping("/ingredients")
@@ -28,7 +28,7 @@ public class IngredientController {
         model.addAttribute("ingredients", ingredientRepository.findAll());
         return "ingredients/index";
     }
-    
+
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("ingredient", new Ingredient());
@@ -36,9 +36,29 @@ public class IngredientController {
     }
 
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult bindingResult, Model model) {
+    public String store(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             return "/ingredient/create";
+        }
+
+        ingredientRepository.save(ingredient);
+
+        return "redirect:/ingredients";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        boolean edit = true;
+        model.addAttribute("edit", edit);
+        model.addAttribute("ingredient", ingredientRepository.findById(id).get());
+        return "ingredients/form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "/ingredients/form";
         }
 
         ingredientRepository.save(ingredient);

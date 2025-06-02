@@ -7,11 +7,13 @@
             <h1>I nostri ingredienti</h1>
             <a th:href="@{/ingredients/create}" class="btn btn-primary">Aggiungi ingrediente</a>
         </div>
-        <table class="table">
+        <h2 th:if="${ingredients.size() == 0}">Nessun ingrediente presente</h2>
+        <table th:unless="${ingredients.size() == 0}" class="table">
             <thead>
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Pizze associate</th>
+                <th></th>
             </thead>
             <tbody>
                 <tr th:each="ingredient : ${ingredients}">
@@ -19,6 +21,7 @@
                     <td th:if="${ingredient.description.length > 0}">[[${ingredient.description}]]</td>
                     <td th:unless="${ingredient.description.length > 0}">Nessuna descrizione per questo ingrediente</td>
                     <td>[[${ingredient.getPizzas()}]]</td>
+                    <td><a class="btn btn-primary" th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}">Modifica</a></td>
                 </tr>
             </tbody>
         </table>

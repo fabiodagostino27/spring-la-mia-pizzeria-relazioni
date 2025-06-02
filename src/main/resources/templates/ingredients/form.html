@@ -6,7 +6,7 @@
         <h1 th:unless="${edit}">Crea un ingrediente</h1>
         <h1 th:if="${edit}">Modifica: [[${ingredient.name}]]</h1>
         <form id="sale-form" th:object="${ingredient}"
-            th:action="${edit} ? @{/sales/edit/{id}(id=${sale.id})} : @{/ingredients/create}" th:method="POST" class="my-3">
+            th:action="${edit} ? @{/ingredients/edit/{id}(id=${ingredient.id})} : @{/ingredients/create}" th:method="POST" class="my-3">
             <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}" th:errorClass="is-invalid">
