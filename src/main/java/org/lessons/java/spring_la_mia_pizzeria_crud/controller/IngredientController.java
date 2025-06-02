@@ -14,6 +14,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/ingredients")
@@ -21,6 +23,12 @@ public class IngredientController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        return "ingredients/index";
+    }
+    
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("ingredient", new Ingredient());
@@ -35,7 +43,7 @@ public class IngredientController {
 
         ingredientRepository.save(ingredient);
 
-        return "redirect:/pizzas";
+        return "redirect:/ingredients";
     }
 
 }

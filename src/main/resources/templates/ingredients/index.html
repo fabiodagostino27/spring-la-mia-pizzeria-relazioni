@@ -1,0 +1,30 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body>
+    <nav th:replace="~{fragments/fragments :: navbar}" />
+    <main class="container mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <h1>I nostri ingredienti</h1>
+            <a th:href="@{/ingredients/create}" class="btn btn-primary">Aggiungi ingrediente</a>
+        </div>
+        <table class="table">
+            <thead>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Pizze associate</th>
+            </thead>
+            <tbody>
+                <tr th:each="ingredient : ${ingredients}">
+                    <td>[[${ingredient.name}]]</td>
+                    <td th:if="${ingredient.description.length > 0}">[[${ingredient.description}]]</td>
+                    <td th:unless="${ingredient.description.length > 0}">Nessuna descrizione per questo ingrediente</td>
+                    <td>[[${ingredient.getPizzas()}]]</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+</body>
+
+</html>
