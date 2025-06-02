@@ -104,7 +104,6 @@ public class Pizza {
         this.ingredients = ingredients;
     }
 
-
     @Override
     public String toString() {
         return String.format("%s, %s", this.name, this.description);

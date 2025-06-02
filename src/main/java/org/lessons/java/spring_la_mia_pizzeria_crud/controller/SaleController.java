@@ -1,6 +1,5 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.controller;
 
-import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Sale;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repo.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

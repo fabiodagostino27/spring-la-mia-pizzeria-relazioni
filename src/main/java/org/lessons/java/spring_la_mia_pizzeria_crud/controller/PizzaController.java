@@ -1,7 +1,6 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Sale;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/pizzas")
