@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/ingredients")
@@ -66,4 +68,17 @@ public class IngredientController {
         return "redirect:/ingredients";
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        Ingredient ingredient = ingredientRepository.findById(id).get();
+        
+        for (Pizza pizza : ingredient.getPizzas()) {
+            pizza.getIngredients().remove(ingredient);
+        }
+
+        ingredientRepository.delete(ingredient);
+        
+        return "redirect:/ingredients";
+    }
+    
 }
